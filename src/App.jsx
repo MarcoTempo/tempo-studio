@@ -781,6 +781,28 @@ ${lineasDias}
           0%,100% { background-position: 0% 50%; }
           50%     { background-position: 100% 50%; }
         }
+        @keyframes sphere1 {
+          0%,100% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
+          25%     { transform: translate(-15px, 20px) rotate(3deg) scale(1.03); }
+          50%     { transform: translate(-25px, 10px) rotate(6deg) scale(0.97); }
+          75%     { transform: translate(-10px, 25px) rotate(2deg) scale(1.02); }
+        }
+        @keyframes sphere2 {
+          0%,100% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
+          30%     { transform: translate(18px, -15px) rotate(-4deg) scale(1.04); }
+          60%     { transform: translate(25px, -8px) rotate(-7deg) scale(0.96); }
+          80%     { transform: translate(12px, -20px) rotate(-3deg) scale(1.01); }
+        }
+        @keyframes sphere3 {
+          0%,100% { transform: translate(0px, 0px) scale(1); }
+          40%     { transform: translate(12px, 18px) scale(1.05); }
+          70%     { transform: translate(20px, 8px) scale(0.95); }
+        }
+        @keyframes sphere4 {
+          0%,100% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
+          35%     { transform: translate(-10px, -12px) rotate(5deg) scale(1.08); }
+          70%     { transform: translate(-18px, -6px) rotate(10deg) scale(0.92); }
+        }
 
         .fade-up { animation: fadeUp 0.4s cubic-bezier(.16,1,.3,1) forwards; }
 
@@ -819,13 +841,48 @@ ${lineasDias}
         .class-card:active { transform: scale(0.95); }
       `}</style>
 
-      {/* ── Animated orbs background ── */}
+      {/* ── Minimal elegant spheres — TEMPO blue palette ── */}
       <div style={{ position:"fixed", inset:0, pointerEvents:"none", zIndex:0, overflow:"hidden" }}>
-        <div style={{ position:"absolute", top:"-10%", left:"20%", width:420, height:420, borderRadius:"50%", background:"radial-gradient(circle, rgba(10,132,255,0.18) 0%, transparent 70%)", animation:"orb1 12s ease-in-out infinite" }}/>
-        <div style={{ position:"absolute", top:"40%", right:"-5%", width:320, height:320, borderRadius:"50%", background:"radial-gradient(circle, rgba(0,96,223,0.14) 0%, transparent 70%)", animation:"orb2 16s ease-in-out infinite" }}/>
-        <div style={{ position:"absolute", bottom:"10%", left:"10%", width:260, height:260, borderRadius:"50%", background:"radial-gradient(circle, rgba(48,209,88,0.08) 0%, transparent 70%)", animation:"orb3 20s ease-in-out infinite" }}/>
-        {/* Grid lines */}
-        <div style={{ position:"absolute", inset:0, backgroundImage:"linear-gradient(rgba(10,132,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(10,132,255,0.04) 1px, transparent 1px)", backgroundSize:"60px 60px" }}/>
+
+        {/* Sphere 1 — primary, top right, blue */}
+        <div style={{
+          position:"absolute", top:"-12%", right:"-10%",
+          width:320, height:320, borderRadius:"50%",
+          background:"radial-gradient(circle at 38% 32%, rgba(255,255,255,0.08) 0%, rgba(10,132,255,0.12) 25%, rgba(0,60,200,0.08) 55%, transparent 75%)",
+          boxShadow:"inset -12px -12px 40px rgba(0,30,100,0.3), inset 8px 8px 20px rgba(255,255,255,0.04), 0 0 80px rgba(10,132,255,0.08)",
+          animation:"sphere1 16s ease-in-out infinite",
+          border:"1px solid rgba(10,132,255,0.08)"
+        }}>
+          <div style={{ position:"absolute", top:"20%", left:"24%", width:"28%", height:"18%", borderRadius:"50%", background:"radial-gradient(ellipse, rgba(255,255,255,0.12) 0%, transparent 100%)", transform:"rotate(-25deg)" }}/>
+        </div>
+
+        {/* Sphere 2 — secondary, bottom left, deep blue */}
+        <div style={{
+          position:"absolute", bottom:"-10%", left:"-8%",
+          width:260, height:260, borderRadius:"50%",
+          background:"radial-gradient(circle at 36% 30%, rgba(255,255,255,0.06) 0%, rgba(0,96,223,0.1) 30%, rgba(0,40,150,0.06) 60%, transparent 80%)",
+          boxShadow:"inset -10px -10px 35px rgba(0,20,80,0.25), inset 6px 6px 16px rgba(255,255,255,0.03), 0 0 60px rgba(0,96,223,0.06)",
+          animation:"sphere2 20s ease-in-out infinite",
+          border:"1px solid rgba(0,96,223,0.07)"
+        }}>
+          <div style={{ position:"absolute", top:"18%", left:"22%", width:"26%", height:"16%", borderRadius:"50%", background:"radial-gradient(ellipse, rgba(255,255,255,0.1) 0%, transparent 100%)", transform:"rotate(-20deg)" }}/>
+        </div>
+
+        {/* Sphere 3 — accent, center right, subtle */}
+        <div style={{
+          position:"absolute", top:"35%", right:"-5%",
+          width:160, height:160, borderRadius:"50%",
+          background:"radial-gradient(circle at 36% 30%, rgba(255,255,255,0.05) 0%, rgba(10,132,255,0.08) 40%, transparent 70%)",
+          boxShadow:"inset -8px -8px 24px rgba(0,20,80,0.2), 0 0 40px rgba(10,132,255,0.05)",
+          animation:"sphere3 24s ease-in-out infinite",
+          border:"1px solid rgba(10,132,255,0.06)"
+        }}>
+          <div style={{ position:"absolute", top:"20%", left:"24%", width:"24%", height:"15%", borderRadius:"50%", background:"radial-gradient(ellipse, rgba(255,255,255,0.08) 0%, transparent 100%)", transform:"rotate(-20deg)" }}/>
+        </div>
+
+        {/* Subtle ambient glow */}
+        <div style={{ position:"absolute", top:0, right:0, width:"40%", height:"40%", background:"radial-gradient(ellipse at 80% 10%, rgba(10,132,255,0.05) 0%, transparent 65%)" }}/>
+        <div style={{ position:"absolute", bottom:0, left:0, width:"40%", height:"40%", background:"radial-gradient(ellipse at 20% 90%, rgba(0,96,223,0.04) 0%, transparent 65%)" }}/>
       </div>
       <div style={{ position:"relative", zIndex:1 }}>
 
@@ -872,6 +929,22 @@ ${lineasDias}
                 <span style={{ fontSize: 8, letterSpacing: 0.5, textTransform: "uppercase" }}>{t.label}</span>
               </button>
             ))}
+          </div>
+          {/* Toggle Mobile / Desktop */}
+          <div style={{ display:"flex", justifyContent:"flex-end", padding:"3px 0 5px" }}>
+            <div style={{ display:"flex", background:"rgba(255,255,255,0.07)", borderRadius:20, padding:2, gap:2 }}>
+              {[["📱","Mobile","mobile"],["🖥️","Desktop","desktop"]].map(([icon,label,val])=>(
+                <button key={val} onClick={()=>setLayout(val)} style={{
+                  padding:"4px 10px", borderRadius:16, border:"none", cursor:"pointer",
+                  background: layout===val ? "rgba(10,132,255,0.35)" : "transparent",
+                  color: layout===val ? "#0A84FF" : "rgba(255,255,255,0.4)",
+                  fontSize:10, fontWeight: layout===val ? 700 : 400,
+                  display:"flex", alignItems:"center", gap:4, transition:"all 0.2s"
+                }}>
+                  <span>{icon}</span><span>{label}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
