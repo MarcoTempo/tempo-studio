@@ -837,13 +837,13 @@ ${lineasDias}
       )}
 
       {/* HEADER */}
-      <div style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(30px)", WebkitBackdropFilter: "blur(30px)", borderBottom: "1px solid rgba(255,255,255,0.07)", padding: "14px 16px 0", position: "sticky", top: 0, zIndex: 100 }}>
+      <div style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(30px)", WebkitBackdropFilter: "blur(30px)", borderBottom: "1px solid rgba(255,255,255,0.07)", padding: "10px 14px 0", position: "sticky", top: 0, zIndex: 100 }}>
         <div style={{ maxWidth: 540, margin: "0 auto" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
               <div style={{ position: "relative" }}>
                 <div style={{ position:"absolute", inset:-8, borderRadius:"50%", background:"radial-gradient(circle,rgba(10,132,255,0.25) 0%,transparent 70%)", animation:"orb1 4s ease-in-out infinite" }}/>
-                <img src={LOGO_B64} alt="Tempo" style={{ height: 36, width: "auto", filter: "brightness(0) invert(1)", position:"relative", zIndex:1 }} />
+                <img src={LOGO_B64} alt="Tempo" style={{ height: 30, width: "auto", filter: "brightness(0) invert(1)", position:"relative", zIndex:1 }} />
               </div>
               <div>
                 <div style={{ fontSize: 15, fontWeight: 700, letterSpacing: 0.5, color: "#FFFFFF", lineHeight: 1.1 }}>TEMPO STUDIO</div>
@@ -852,14 +852,14 @@ ${lineasDias}
             </div>
             <div style={{ textAlign: "right" }}>
               <div style={{ fontSize: 9, color: "rgba(255,255,255,0.3)", marginBottom: 3, letterSpacing: 1, textTransform: "uppercase" }}>Total semana</div>
-              <div style={{ fontSize: 30, fontWeight: 800, letterSpacing: -1.5, lineHeight: 1, background: "linear-gradient(135deg,#0A84FF,#5AC8FA)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", fontVariantNumeric: "tabular-nums" }}>${totalGlobal.toLocaleString()}</div>
+              <div style={{ fontSize: 26, fontWeight: 800, letterSpacing: -1.5, lineHeight: 1, background: "linear-gradient(135deg,#0A84FF,#5AC8FA)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", fontVariantNumeric: "tabular-nums" }}>${totalGlobal.toLocaleString()}</div>
               <button onClick={handleLogout} style={{ marginTop: 4, fontSize: 9, color: "rgba(255,255,255,0.2)", background: "transparent", border: "none", cursor: "pointer", padding: 0, letterSpacing: 0.5 }}>Cerrar sesión</button>
             </div>
           </div>
           <div style={{ display: "flex", gap: 3, background: "rgba(255,255,255,0.06)", borderRadius: 12, padding: "3px", marginBottom: 2 }}>
             {TABS.map(t => (
               <button key={t.id} onClick={() => setVista(t.id)} style={{
-                flex: 1, padding: "8px 0", border: "none", cursor: "pointer",
+                flex: 1, padding: "6px 0", border: "none", cursor: "pointer",
                 background: vista === t.id ? "rgba(10,132,255,0.28)" : "transparent",
                 borderRadius: 10,
                 color: vista === t.id ? "#0A84FF" : "rgba(255,255,255,0.35)",
@@ -875,7 +875,7 @@ ${lineasDias}
           </div>
         </div>
       </div>
-      <div style={{ maxWidth: layout==="desktop" ? "100%" : 540, margin: "0 auto", padding: layout==="desktop" ? "24px 32px 0" : "16px 14px 0", display: layout==="desktop" ? "flex" : "block", gap: layout==="desktop" ? 24 : 0, alignItems: "flex-start" }}>
+      <div style={{ maxWidth: layout==="desktop" ? "100%" : 540, margin: "0 auto", padding: layout==="desktop" ? "24px 32px 0" : "10px 12px 0", display: layout==="desktop" ? "flex" : "block", gap: layout==="desktop" ? 24 : 0, alignItems: "flex-start" }}>
 
         {/* ══════════ REGISTRO ══════════ */}
         {vista === "registro" && (
@@ -982,15 +982,15 @@ ${lineasDias}
           ) : (
             // ── MOBILE LAYOUT (existing) ──
             <>
-            <div style={{ marginBottom: 14 }}>
-              <div style={{ fontSize: 10, color: "rgba(240,237,232,0.35)", letterSpacing: 2, textTransform: "uppercase", marginBottom: 8 }}>Instructor</div>
+            <div style={{ marginBottom: 6 }}>
+              <div style={{ fontSize: 10, color: "rgba(240,237,232,0.35)", letterSpacing: 2, textTransform: "uppercase", marginBottom: 6 }}>Instructor</div>
               <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                 {instructores.map(i => {
                   const r = resumenInstructor(i.id);
                   const activo = instrActivo === i.id;
                   return (
                     <button key={i.id} onClick={() => setInstrActivo(i.id)} style={{
-                      padding: "8px 14px", borderRadius: 50, border: `1.5px solid ${activo ? i.color : "rgba(255,255,255,0.1)"}`,
+                      padding: "6px 11px", borderRadius: 50, border: `1.5px solid ${activo ? i.color : "rgba(255,255,255,0.1)"}`,
                       background: activo ? `${i.color}22` : "rgba(255,255,255,0.04)",
                       cursor: "pointer", display: "flex", alignItems: "center", gap: 7,
                       transition: "all 0.25s cubic-bezier(.16,1,.3,1)",
@@ -1008,7 +1008,7 @@ ${lineasDias}
             </div>
 
             {instrActualObj && (
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12, padding: "10px 12px", background: `${instrActualObj.color}15`, borderRadius: 10, border: `1px solid ${instrActualObj.color}25` }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12, padding: "8px 10px", background: `${instrActualObj.color}15`, borderRadius: 10, border: `1px solid ${instrActualObj.color}25` }}>
                 {editNombre === instrActualObj.id ? (
                   <input value={tmpNombre} onChange={e => setTmpNombre(e.target.value)}
                     onBlur={() => { if (tmpNombre.trim()) setInstructores(prev => prev.map(i => i.id === instrActualObj.id ? { ...i, nombre: tmpNombre.trim() } : i)); setEditNombre(null); }}
@@ -1032,8 +1032,8 @@ ${lineasDias}
               const csDia = getClasesDia(instrActualObj.id, dia);
               const subtotal = csDia.reduce((a, c) => a + calcularPago(c.asistentes).total, 0);
               return (
-                <div key={dia} style={{ marginBottom: 14 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 7 }}>
+                <div key={dia} style={{ marginBottom: 8 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
                     <span style={{ fontSize: 11, fontWeight: 600, color: "rgba(240,237,232,0.4)", textTransform: "uppercase", letterSpacing: 1.5 }}>{dia}</span>
                     {subtotal > 0 && <span style={{ fontSize: 11, fontWeight: 700, color: instrActualObj.color }}>${subtotal}</span>}
                   </div>
@@ -1043,15 +1043,15 @@ ${lineasDias}
                       return (
                         <button key={c.key} onClick={() => editarClase(c.key, c.asistentes)} style={{
                           background: "rgba(255,255,255,0.04)", border: `1px solid ${p.tipo === "lleno" ? "#0A84FF" : p.tipo === "vacio" ? "#FF453A44" : "rgba(255,255,255,0.08)"}`,
-                          borderRadius: 10, padding: "9px 11px", cursor: "pointer", textAlign: "left", minWidth: 90
+                          borderRadius: 10, padding: "7px 9px", cursor: "pointer", textAlign: "left", minWidth: 82
                         }}>
                           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
                             <span style={{ fontSize: 10, color: "rgba(240,237,232,0.4)" }}>Clase {c.idx + 1}</span>
                             {p.tipo === "lleno" && <span style={{ fontSize: 9, background: "#4A6FE322", color: "#0A84FF", borderRadius: 4, padding: "1px 4px", fontWeight: 700 }}>BONO</span>}
                             {p.tipo === "vacio" && <span style={{ fontSize: 9, background: "#FF453A22", color: "#FF453A", borderRadius: 4, padding: "1px 4px", fontWeight: 700 }}>VACÍO</span>}
                           </div>
-                          <div style={{ fontSize: 14, fontWeight: 800, marginBottom: 4 }}>{c.asistentes}<span style={{ fontSize: 9, color: "rgba(240,237,232,0.3)", fontWeight: 400 }}>/{CAPACIDAD}</span></div>
-                          <div style={{ height: 3, background: "rgba(255,255,255,0.07)", borderRadius: 2, marginBottom: 4 }}>
+                          <div style={{ fontSize: 13, fontWeight: 800, marginBottom: 3 }}>{c.asistentes}<span style={{ fontSize: 9, color: "rgba(240,237,232,0.3)", fontWeight: 400 }}>/{CAPACIDAD}</span></div>
+                          <div style={{ height: 2, background: "rgba(255,255,255,0.07)", borderRadius: 2, marginBottom: 3 }}>
                             <div style={{ height: "100%", width: `${(c.asistentes / CAPACIDAD) * 100}%`, background: p.tipo === "lleno" ? "#0A84FF" : p.tipo === "vacio" ? "#FF453A" : instrActualObj.color, borderRadius: 2 }} />
                           </div>
                           <div style={{ fontSize: 12, fontWeight: 700, color: p.tipo === "lleno" ? "#0A84FF" : p.tipo === "vacio" ? "#FF453A" : "rgba(240,237,232,0.8)" }}>${p.total}</div>
@@ -1061,7 +1061,7 @@ ${lineasDias}
                     <button onClick={() => agregarClase(instrActualObj.id, dia)} style={{
                       background: "transparent", border: "2px dashed rgba(255,255,255,0.08)", borderRadius: 10,
                       padding: "9px 13px", cursor: "pointer", color: "rgba(240,237,232,0.25)", fontSize: 22,
-                      minWidth: 56, minHeight: 78, display: "flex", alignItems: "center", justifyContent: "center"
+                      minWidth: 44, minHeight: 66, display: "flex", alignItems: "center", justifyContent: "center"
                     }}>+</button>
                   </div>
                 </div>
@@ -1193,7 +1193,7 @@ ${lineasDias}
         {/* ══════════ HISTORIAL ══════════ */}
         {vista === "historial" && (
           <>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
               <div style={{ fontSize: 10, color: "rgba(240,237,232,0.35)", letterSpacing: 2, textTransform: "uppercase" }}>Historial de pagos</div>
               <div style={{ fontSize: 11, color: "rgba(240,237,232,0.3)" }}>{historial.length} semanas</div>
             </div>
