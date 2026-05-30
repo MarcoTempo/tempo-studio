@@ -538,6 +538,72 @@ ${lineasDias}
     { id: "historial", icon: "🗂️", label: "Historial" },
   ];
 
+  // ── Pantalla de login ──
+  if (!loggedIn) {
+    return (
+      <div style={{ minHeight:"100vh", background:"linear-gradient(160deg,#000000 0%,#050510 60%,#000000 100%)", fontFamily:"-apple-system,BlinkMacSystemFont,Helvetica Neue,Arial,sans-serif", color:"#F0EDE8", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:24, position:"relative", overflow:"hidden" }}>
+        <div style={{ position:"fixed", inset:0, pointerEvents:"none" }}>
+          <div style={{ position:"absolute", top:"10%", left:"20%", width:400, height:400, borderRadius:"50%", background:"radial-gradient(circle,rgba(10,132,255,0.2) 0%,transparent 70%)", animation:"orb1 12s ease-in-out infinite" }}/>
+          <div style={{ position:"absolute", bottom:"10%", right:"10%", width:300, height:300, borderRadius:"50%", background:"radial-gradient(circle,rgba(0,96,223,0.15) 0%,transparent 70%)", animation:"orb2 16s ease-in-out infinite" }}/>
+        </div>
+        <style>{`@keyframes orb1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-40px) scale(1.1)}} @keyframes orb2{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,30px)}}`}</style>
+
+        <div style={{ width:"100%", maxWidth:360, position:"relative", zIndex:1 }}>
+          <div style={{ textAlign:"center", marginBottom:40 }}>
+            <div style={{ position:"relative", display:"inline-block", marginBottom:16 }}>
+              <div style={{ position:"absolute", inset:-14, borderRadius:"50%", background:"radial-gradient(circle,rgba(10,132,255,0.3) 0%,transparent 70%)" }}/>
+              <img src={LOGO_B64} alt="Tempo" style={{ height:70, width:"auto", filter:"brightness(0) invert(1)", position:"relative", zIndex:1 }}/>
+            </div>
+            <div style={{ fontSize:24, fontWeight:800, letterSpacing:-0.5, color:"#FFFFFF" }}>TEMPO STUDIO</div>
+            <div style={{ fontSize:10, color:"rgba(255,255,255,0.3)", marginTop:6, letterSpacing:2.5, textTransform:"uppercase" }}>Power of Music on Efficient Time</div>
+          </div>
+
+          <div style={{ background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.1)", borderRadius:22, padding:28, backdropFilter:"blur(30px)" }}>
+            <div style={{ fontSize:12, fontWeight:600, color:"rgba(255,255,255,0.5)", marginBottom:22, textAlign:"center", letterSpacing:1, textTransform:"uppercase" }}>Acceso al sistema</div>
+
+            <div style={{ marginBottom:14 }}>
+              <div style={{ fontSize:10, color:"rgba(255,255,255,0.4)", letterSpacing:1.5, textTransform:"uppercase", marginBottom:6 }}>Usuario</div>
+              <input value={loginUser} onChange={e=>{ setLoginUser(e.target.value); setLoginError(""); }}
+                onKeyDown={e=>e.key==="Enter"&&handleLogin()}
+                placeholder="Ingresa tu usuario" autoCapitalize="none" autoCorrect="off"
+                style={{ width:"100%", padding:"12px 14px", background:"rgba(255,255,255,0.07)", border:`1px solid ${loginError?"rgba(255,69,58,0.5)":"rgba(255,255,255,0.12)"}`, borderRadius:10, color:"#F0EDE8", fontSize:15, outline:"none", boxSizing:"border-box" }}
+              />
+            </div>
+
+            <div style={{ marginBottom:20 }}>
+              <div style={{ fontSize:10, color:"rgba(255,255,255,0.4)", letterSpacing:1.5, textTransform:"uppercase", marginBottom:6 }}>Contraseña</div>
+              <div style={{ position:"relative" }}>
+                <input value={loginPass} onChange={e=>{ setLoginPass(e.target.value); setLoginError(""); }}
+                  onKeyDown={e=>e.key==="Enter"&&handleLogin()}
+                  type={showPass ? "text" : "password"} placeholder="Ingresa tu contraseña"
+                  style={{ width:"100%", padding:"12px 44px 12px 14px", background:"rgba(255,255,255,0.07)", border:`1px solid ${loginError?"rgba(255,69,58,0.5)":"rgba(255,255,255,0.12)"}`, borderRadius:10, color:"#F0EDE8", fontSize:15, outline:"none", boxSizing:"border-box" }}
+                />
+                <button onClick={()=>setShowPass(p=>!p)} style={{ position:"absolute", right:12, top:"50%", transform:"translateY(-50%)", background:"transparent", border:"none", cursor:"pointer", color:"rgba(255,255,255,0.4)", fontSize:18 }}>
+                  {showPass?"🙈":"👁️"}
+                </button>
+              </div>
+            </div>
+
+            {loginError && (
+              <div style={{ background:"rgba(255,69,58,0.12)", border:"1px solid rgba(255,69,58,0.3)", borderRadius:8, padding:"8px 12px", marginBottom:16, fontSize:12, color:"#FF453A", textAlign:"center" }}>
+                ⚠️ {loginError}
+              </div>
+            )}
+
+            <button onClick={handleLogin} disabled={!loginUser||!loginPass} style={{
+              width:"100%", padding:14, background: loginUser&&loginPass ? "#0A84FF" : "rgba(255,255,255,0.08)",
+              border:"none", borderRadius:10, color: loginUser&&loginPass ? "#fff" : "rgba(255,255,255,0.3)",
+              fontWeight:800, fontSize:15, cursor: loginUser&&loginPass ? "pointer" : "default", letterSpacing:0.5
+            }}>
+              Entrar →
+            </button>
+          </div>
+          <div style={{ textAlign:"center", marginTop:20, fontSize:11, color:"rgba(255,255,255,0.2)" }}>Sistema de nómina · Tempo Studio</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div style={{ minHeight:"100vh", background:"#000005", fontFamily:"-apple-system,BlinkMacSystemFont,Helvetica Neue,Arial,sans-serif", color:"#F0EDE8", paddingBottom:90, position:"relative", overflow:"hidden" }}>
       <style>{`
