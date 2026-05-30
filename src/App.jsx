@@ -88,6 +88,21 @@ export default function App() {
   const [editTelModal, setEditTelModal] = useState(null); // instrId being edited
   const [tmpTel, setTmpTel]             = useState("");
   const [confirmReset, setConfirmReset] = useState(false);
+  const [showSplash, setShowSplash] = useState(() => {
+    // Show splash only once per session
+    if (typeof sessionStorage !== "undefined" && sessionStorage.getItem("tempo_splash_shown")) return false;
+    return true;
+  });
+
+  useEffect(() => {
+    if (showSplash) {
+      const t = setTimeout(() => {
+        setShowSplash(false);
+        try { sessionStorage.setItem("tempo_splash_shown", "1"); } catch {}
+      }, 3200);
+      return () => clearTimeout(t);
+    }
+  }, [showSplash]);
   const [layout, setLayout] = useState(() => {
     if (typeof window !== "undefined" && window.innerWidth >= 1024) return "desktop";
     return "mobile";
@@ -537,6 +552,129 @@ ${lineasDias}
     { id: "resumen",   icon: "📊", label: "Resumen" },
     { id: "historial", icon: "🗂️", label: "Historial" },
   ];
+
+  // ── Splash screen ──
+  if (showSplash) {
+    return (
+      <div style={{
+        minHeight:"100vh", background:"#000000",
+        fontFamily:"-apple-system,BlinkMacSystemFont,Helvetica Neue,Arial,sans-serif",
+        display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center",
+        position:"relative", overflow:"hidden"
+      }}>
+        <style>{`
+          @keyframes splashOrb1 {
+            0%   { transform: scale(0.8) translate(0,0);   opacity:0; }
+            30%  { opacity: 0.6; }
+            100% { transform: scale(1.4) translate(20px,-30px); opacity:0; }
+          }
+          @keyframes splashOrb2 {
+            0%   { transform: scale(0.6) translate(0,0);   opacity:0; }
+            40%  { opacity:0.5; }
+            100% { transform: scale(1.3) translate(-25px,25px); opacity:0; }
+          }
+          @keyframes splashOrb3 {
+            0%   { transform: scale(0.5); opacity:0; }
+            50%  { opacity:0.4; }
+            100% { transform: scale(1.6); opacity:0; }
+          }
+          @keyframes logoIn {
+            0%   { opacity:0; transform: scale(0.6) translateY(20px); filter: blur(12px); }
+            60%  { opacity:1; transform: scale(1.05) translateY(-4px); filter: blur(0px); }
+            100% { opacity:1; transform: scale(1) translateY(0); filter: blur(0px); }
+          }
+          @keyframes nameIn {
+            0%   { opacity:0; transform: translateY(16px) skewX(-4deg); letter-spacing: 8px; }
+            100% { opacity:1; transform: translateY(0) skewX(0deg); letter-spacing: 0.5px; }
+          }
+          @keyframes tagIn {
+            0%   { opacity:0; transform: translateY(10px); }
+            100% { opacity:0.4; transform: translateY(0); }
+          }
+          @keyframes lineExpand {
+            0%   { width: 0; opacity:0; }
+            100% { width: 120px; opacity:1; }
+          }
+          @keyframes pulseGlow {
+            0%,100% { box-shadow: 0 0 40px rgba(10,132,255,0.4), 0 0 80px rgba(10,132,255,0.2); }
+            50%      { box-shadow: 0 0 60px rgba(10,132,255,0.7), 0 0 120px rgba(10,132,255,0.3); }
+          }
+          @keyframes fadeOut {
+            0%   { opacity:1; }
+            100% { opacity:0; transform: scale(1.05); }
+          }
+          .splash-container {
+            animation: fadeOut 0.5s ease-in-out 2.8s both;
+          }
+        `}</style>
+
+        {/* Background orbs */}
+        <div style={{ position:"fixed", inset:0, pointerEvents:"none" }}>
+          <div style={{ position:"absolute", top:"15%", left:"15%", width:500, height:500, borderRadius:"50%", background:"radial-gradient(circle,rgba(10,132,255,0.35) 0%,transparent 65%)", animation:"splashOrb1 3s ease-out forwards" }}/>
+          <div style={{ position:"absolute", bottom:"10%", right:"10%", width:400, height:400, borderRadius:"50%", background:"radial-gradient(circle,rgba(0,96,223,0.3) 0%,transparent 65%)", animation:"splashOrb2 3s ease-out 0.2s forwards" }}/>
+          <div style={{ position:"absolute", top:"40%", left:"40%", width:300, height:300, borderRadius:"50%", background:"radial-gradient(circle,rgba(48,209,88,0.15) 0%,transparent 65%)", animation:"splashOrb3 3s ease-out 0.4s forwards" }}/>
+          {/* Grid */}
+          <div style={{ position:"absolute", inset:0, backgroundImage:"linear-gradient(rgba(10,132,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(10,132,255,0.05) 1px,transparent 1px)", backgroundSize:"60px 60px" }}/>
+        </div>
+
+        {/* Main content */}
+        <div className="splash-container" style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:0, position:"relative", zIndex:1 }}>
+
+          {/* Logo with glow ring */}
+          <div style={{
+            position:"relative", marginBottom:28,
+            animation:"logoIn 0.9s cubic-bezier(.16,1,.3,1) 0.2s both"
+          }}>
+            <div style={{
+              position:"absolute", inset:-20, borderRadius:"50%",
+              animation:"pulseGlow 2s ease-in-out 0.8s infinite"
+            }}/>
+            <div style={{
+              width:110, height:110, borderRadius:"50%",
+              background:"linear-gradient(135deg,rgba(10,132,255,0.2),rgba(0,0,0,0.8))",
+              border:"1px solid rgba(10,132,255,0.4)",
+              display:"flex", alignItems:"center", justifyContent:"center",
+              position:"relative", zIndex:1
+            }}>
+              <img src={LOGO_B64} alt="Tempo" style={{ height:70, width:"auto", filter:"brightness(0) invert(1)" }}/>
+            </div>
+          </div>
+
+          {/* Studio name */}
+          <div style={{
+            fontSize:32, fontWeight:900, color:"#FFFFFF", letterSpacing:0.5,
+            background:"linear-gradient(135deg,#FFFFFF 0%,rgba(255,255,255,0.7) 100%)",
+            WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text",
+            animation:"nameIn 0.8s cubic-bezier(.16,1,.3,1) 0.8s both"
+          }}>TEMPO STUDIO</div>
+
+          {/* Animated line */}
+          <div style={{
+            height:1, background:"linear-gradient(90deg,transparent,#0A84FF,transparent)",
+            margin:"12px 0",
+            animation:"lineExpand 0.6s ease-out 1.4s both"
+          }}/>
+
+          {/* Tagline */}
+          <div style={{
+            fontSize:11, color:"rgba(255,255,255,0.4)", letterSpacing:3,
+            textTransform:"uppercase",
+            animation:"tagIn 0.6s ease-out 1.6s both"
+          }}>Power of Music on Efficient Time</div>
+
+          {/* Loading dots */}
+          <div style={{ display:"flex", gap:6, marginTop:40, animation:"tagIn 0.5s ease-out 2s both" }}>
+            {[0,1,2].map(i => (
+              <div key={i} style={{
+                width:5, height:5, borderRadius:"50%", background:"#0A84FF",
+                animation:`pulseGlow 0.8s ease-in-out ${i*0.2}s infinite`
+              }}/>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // ── Pantalla de login ──
   if (!loggedIn) {
